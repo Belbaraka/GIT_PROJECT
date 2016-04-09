@@ -1,11 +1,5 @@
 Mover mover;
 Cylinder cylinder;
-void setup() {
-  noStroke();
-  mover = new Mover();
-  cylinder = new Cylinder();
-  size(500, 500, P3D);
-}
 
 float depth = 500;
 float rZ=0, rX=0;
@@ -21,14 +15,24 @@ boolean putCylinder=false;
 static final int bWIDTH = 200;
 static final int bDEPTH = 200;
 static final int bHEIGHT = 10;
+
+void setup() {
+  noStroke();
+  mover = new Mover();
+  cylinder = new Cylinder();
+  size(500, 500, P3D);
+}
+
 void draw() {
+  pushMatrix();
+  background(255);
   camera(width/2, height/2, depth, 250, 250, 0, 0, 1, 0);
   directionalLight(50, 100, 125, 0, 1, 0);
   ambientLight(102, 102, 102);
-  background(255);
+  translate(width/2, height/2, 0);
+  popMatrix();
 
   pushMatrix();
-
   translate(width/2, height/2, 0); 
   rotateX(rX);
   rotateZ(rZ);
@@ -41,16 +45,14 @@ void draw() {
     pushMatrix();
     //translate the cylinder up 
     translate(vector.x, -5, vector.z);
-    shape(cylinder.shapeC);
+    cylinder.display();
     popMatrix();
   } 
   pushMatrix();
-  //translate the sphere up 
+  //Translate the sphere up in the main board
   translate(0, -15, 0);
   if (!gamePaused) {
     mover.update(rX, rZ);
-    mover.checkCylinderCollision(positions);
-    mover.checkEdges();
   }
   mover.display();
   popMatrix();
