@@ -4,7 +4,7 @@ class Mover {
   PVector gravityForce;
   float constantG = 0.21;
   float normalForce = 1;
-  float mu = 0.1;
+  float mu = 0.05;
   float frictionMagnitude = normalForce * mu;
   PVector friction;
   float sphereRad = 10;
