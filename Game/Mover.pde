@@ -4,7 +4,7 @@ class Mover {
   PVector gravityForce;
   float constantG = 0.21;
   float normalForce = 1;
-  float mu = 0.05;
+  float mu = 0.1;
   float frictionMagnitude = normalForce * mu;
   PVector friction;
   float sphereRad = 10;
@@ -23,11 +23,11 @@ class Mover {
     friction.normalize();
     friction.mult(frictionMagnitude);
     gravityForce.x = sin(rZ) * constantG;
-    gravityForce.z = -sin(rX) * constantG;   
+    gravityForce.z = -sin(rX) * constantG; 
+    checkCylinderCollision();
     velocity.add(gravityForce);
     velocity.add(friction);
     location.add(velocity);
-    checkCylinderCollision();
     checkEdges();
   }
 
@@ -56,7 +56,6 @@ class Mover {
   }
 
   void checkCylinderCollision() {
-    // Check the position of all Towers prior to the ball
     for (PVector Cylinder : positions) {
       float dist = PVector.dist(Cylinder, location);
 
