@@ -4,8 +4,8 @@ import processing.video.Capture;
 import java.util.Collections;
 import java.util.Random;
 
-PImage img, resImg, currentImg;
 boolean use = true;
+PImage img, resImg, currentImg;
 int maxLines = 4;
 Capture cam;
 int min, max;
