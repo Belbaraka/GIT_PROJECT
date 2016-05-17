@@ -1,4 +1,5 @@
 class Mover {
+  PGraphics parent;
   PVector location;
   PVector velocity;
   PVector gravityForce;
@@ -8,13 +9,16 @@ class Mover {
   float frictionMagnitude = normalForce * mu;
   PVector friction;
   float sphereRad = 10;
-
+  float score;
+  float lastScore;
 
   Mover() {
     location = new PVector(0, 0, 0);
     velocity = new PVector(0, 0, 0);
     friction = new PVector(0, 0, 0);
     gravityForce = new PVector(0, 0, 0);
+    score=0;
+    lastScore=0;
   }
 
   void update(float rX, float rZ) {
@@ -32,7 +36,7 @@ class Mover {
   }
 
   void display() {
-    fill(26, 175, 87);
+    fill(120, 50, 87);
     translate(location.x, location.y, location.z);
     sphere(sphereRad);
   }
@@ -42,16 +46,24 @@ class Mover {
     if (location.x > 100) {
       velocity.x = -abs(velocity.x);
       location.x=bWIDTH/2;
+      lastScore=-velocity.mag();
+      score+=lastScore;
     } else if (location.x < -100) {
       velocity.x = abs(velocity.x);
       location.x =-bWIDTH/2;
+      lastScore = -velocity.mag();
+      score += lastScore;
     }
     if (location.z > 100) {
       velocity.z = -abs(velocity.z);
       location.z= bDEPTH/2;
+      lastScore = -velocity.mag();
+      score += lastScore;
     } else if (location.z < -100) {
       velocity.z = abs(velocity.z);
       location.z=-bDEPTH/2;
+      lastScore = -velocity.mag();
+      score += lastScore;
     }
   }
 
@@ -66,6 +78,8 @@ class Mover {
         n.mult(2 * velocity.dot(n));
         velocity = PVector.sub(velocity, n);
         location.add(velocity);
+        lastScore = velocity.mag();
+        score += lastScore;
       }
     }
   }

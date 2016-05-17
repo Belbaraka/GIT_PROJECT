@@ -2,7 +2,7 @@ public static float cylinderBaseSize = 18;
 public static float cylinderHeight = 20;
 public static int cylinderResolution = 40;
 
-class Cylinder {
+public class Cylinder {
   public PShape shapeC = new PShape();
   PShape openCylinder = new PShape();
   PShape topCylinder=new PShape();
